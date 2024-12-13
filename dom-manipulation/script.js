@@ -37,7 +37,7 @@ async function fetchQuotesFromServer() {
 }
 
 // Sync local quotes to server (post new quotes)
-async function syncLocalToServer() {
+async function syncQuotes() {
   try {
     const localUnsyncedQuotes = quotes.filter((quote) => !quote.synced);
 
@@ -65,7 +65,7 @@ function startSyncing() {
   fetchQuotesFromServer(); // Ensure this function is called to fetch data initially
   setInterval(() => {
     fetchQuotesFromServer(); // Periodically fetch quotes
-    syncLocalToServer();     // Periodically sync local quotes
+    syncQuotes();            // Periodically sync local quotes
   }, 30000); // Every 30 seconds (adjust as needed)
 }
 
