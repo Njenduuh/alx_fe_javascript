@@ -54,10 +54,33 @@ async function syncQuotes() {
     }
 
     saveQuotes();
+    showSyncNotification("Quotes synced with server!");
     console.log("Local quotes synced to server.");
   } catch (error) {
     console.error("Error syncing local quotes to server:", error);
   }
+}
+
+// Show notification for syncing status
+function showSyncNotification(message) {
+  const notificationElement = document.createElement("div");
+  notificationElement.className = "sync-notification";
+  notificationElement.textContent = message;
+  
+  // Style the notification
+  notificationElement.style.position = "fixed";
+  notificationElement.style.top = "20px";
+  notificationElement.style.right = "20px";
+  notificationElement.style.padding = "10px";
+  notificationElement.style.backgroundColor = "green";
+  notificationElement.style.color = "white";
+  notificationElement.style.borderRadius = "5px";
+  
+  // Append to body and remove after 5 seconds
+  document.body.appendChild(notificationElement);
+  setTimeout(() => {
+    notificationElement.remove();
+  }, 5000);
 }
 
 // Periodic syncing
