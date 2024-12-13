@@ -10,13 +10,12 @@ function showRandomQuote() {
   const { text, category } = quotes[randomIndex];
 
   const quoteDisplay = document.getElementById("quoteDisplay");
-
   // Clear previous content
   while (quoteDisplay.firstChild) {
     quoteDisplay.removeChild(quoteDisplay.firstChild);
   }
 
-  // Create new elements for the quote
+  // Create and append new elements
   const quoteText = document.createElement("p");
   quoteText.textContent = text;
 
@@ -24,13 +23,13 @@ function showRandomQuote() {
   quoteCategory.textContent = `- ${category}`;
   quoteCategory.style.fontStyle = "italic";
 
-  // Append the new elements
   quoteDisplay.appendChild(quoteText);
   quoteDisplay.appendChild(quoteCategory);
 }
 
 // Function to create and set up the add quote form
 function createAddQuoteForm() {
+  // Add event listener to the "Add Quote" button
   const addQuoteButton = document.getElementById("addQuoteButton");
   addQuoteButton.addEventListener("click", function () {
     const newQuoteText = document.getElementById("newQuoteText").value.trim();
@@ -40,10 +39,12 @@ function createAddQuoteForm() {
       // Add the new quote to the array
       quotes.push({ text: newQuoteText, category: newQuoteCategory });
 
-      // Update the DOM with the new quote
+      // Update the DOM to show the new quote
       const quoteDisplay = document.getElementById("quoteDisplay");
+      while (quoteDisplay.firstChild) {
+        quoteDisplay.removeChild(quoteDisplay.firstChild);
+      }
 
-      // Create new elements for the added quote
       const newQuoteElement = document.createElement("p");
       newQuoteElement.textContent = `"${newQuoteText}"`;
 
@@ -51,13 +52,10 @@ function createAddQuoteForm() {
       categoryElement.textContent = `- ${newQuoteCategory}`;
       categoryElement.style.fontStyle = "italic";
 
-      // Append the new elements
       quoteDisplay.appendChild(newQuoteElement);
       quoteDisplay.appendChild(categoryElement);
 
       alert("Quote added successfully!");
-      
-      // Clear input fields
       document.getElementById("newQuoteText").value = "";
       document.getElementById("newQuoteCategory").value = "";
     } else {
