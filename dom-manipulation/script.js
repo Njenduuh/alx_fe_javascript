@@ -8,24 +8,24 @@ const quotes = [
 function displayRandomQuote() {
   const quoteDisplay = document.getElementById("quoteDisplay");
 
-  // Select a random quote
-  const randomIndex = Math.floor(Math.random() * quotes.length);
-  const randomQuote = quotes[randomIndex];
-
-  // Clear previous quote
+  // Clear previous quote content
   while (quoteDisplay.firstChild) {
     quoteDisplay.removeChild(quoteDisplay.firstChild);
   }
 
-  // Create and append new quote elements
-  const quoteText = document.createElement("p");
-  quoteText.textContent = `"${randomQuote.text}"`;
+  // Select a random quote
+  const randomIndex = Math.floor(Math.random() * quotes.length);
+  const randomQuote = quotes[randomIndex];
 
-  const quoteCategory = document.createElement("p");
-  quoteCategory.textContent = `— ${randomQuote.category}`;
+  // Create and append quote text element
+  const quoteTextElement = document.createElement("p");
+  quoteTextElement.textContent = `"${randomQuote.text}"`;
+  quoteDisplay.appendChild(quoteTextElement);
 
-  quoteDisplay.appendChild(quoteText);
-  quoteDisplay.appendChild(quoteCategory);
+  // Create and append quote category element
+  const quoteCategoryElement = document.createElement("p");
+  quoteCategoryElement.textContent = `— ${randomQuote.category}`;
+  quoteDisplay.appendChild(quoteCategoryElement);
 }
 
 // Function to add a new quote
@@ -34,6 +34,7 @@ function addQuote() {
   const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
 
   if (newQuoteText && newQuoteCategory) {
+    // Add the new quote to the quotes array
     quotes.push({ text: newQuoteText, category: newQuoteCategory });
 
     // Clear the input fields
@@ -46,6 +47,6 @@ function addQuote() {
   }
 }
 
-// Event listeners for buttons
+// Attach event listeners
 document.getElementById("newQuote").addEventListener("click", displayRandomQuote);
 document.getElementById("addQuoteBtn").addEventListener("click", addQuote);
