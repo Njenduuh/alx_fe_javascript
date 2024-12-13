@@ -12,23 +12,27 @@ function showRandomQuote() {
   quoteDisplay.innerHTML = `<p>${text}</p><p><em>- ${category}</em></p>`;
 }
 
+// Function to create and set up the add quote form
+function createAddQuoteForm() {
+  // Add event listener to the "Add Quote" button
+  const addQuoteButton = document.getElementById("addQuoteButton");
+  addQuoteButton.addEventListener("click", function () {
+    const newQuoteText = document.getElementById("newQuoteText").value.trim();
+    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+
+    if (newQuoteText && newQuoteCategory) {
+      quotes.push({ text: newQuoteText, category: newQuoteCategory });
+      alert("Quote added successfully!");
+      document.getElementById("newQuoteText").value = "";
+      document.getElementById("newQuoteCategory").value = "";
+    } else {
+      alert("Please fill in both fields!");
+    }
+  });
+}
+
 // Event listener for the "Show New Quote" button
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
 
-// Function to add a new quote
-function addQuote() {
-  const newQuoteText = document.getElementById("newQuoteText").value.trim();
-  const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
-
-  if (newQuoteText && newQuoteCategory) {
-    quotes.push({ text: newQuoteText, category: newQuoteCategory });
-    alert("Quote added successfully!");
-    document.getElementById("newQuoteText").value = "";
-    document.getElementById("newQuoteCategory").value = "";
-  } else {
-    alert("Please fill in both fields!");
-  }
-}
-
-// Event listener for the "Add Quote" button
-document.getElementById("addQuoteButton").addEventListener("click", addQuote);
+// Initialize the form setup
+createAddQuoteForm();
